@@ -33,8 +33,8 @@ class GenreGroups(base.BaseEstimator,base.TransformerMixin):
         return X
 
     def fit_transform(self,X, *_):
-        self.fit(X[self.colName])
-        return self.transform(X[self.colName])
+        self.fit(X)
+        return self.transform(X)
 
     def inverse_transform(self,array,*_):
         return self._transformer.inverse_transform(array)
