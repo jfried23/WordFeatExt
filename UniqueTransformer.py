@@ -24,7 +24,6 @@ from sklearn import base
 class UniqueTransformer(base.BaseEstimator, base.TransformerMixin):
     def __init__(self, col_name):
         self.col_name = col_name
-        self.mapping_dict = mapping_dict
         
     def fit(self, X, *_):
         return self
@@ -46,7 +45,8 @@ class UniqueTransformer(base.BaseEstimator, base.TransformerMixin):
             else:
                 ret.append(0)
 
-        return ret
+        X['unique_count'] = ret
+        return 
     
     def fit_transform(self,X, *_):
         self.fit(X)
