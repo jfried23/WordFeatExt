@@ -1,3 +1,7 @@
+import base
+import pandas
+from sklearn.preprocessing import LabelBinarizer
+
 class GenreGroups(base.BaseEstimator,base.TransformerMixin):
     """
     Input: 'genre' column, the series.
