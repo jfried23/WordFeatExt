@@ -1,16 +1,12 @@
-import pandas as pd
 import numpy as np
 from sklearn import base
 from sklearn import pipeline
 from sklearn import preprocessing
 
-class WordCount(base.BaseEstimator,base.TransformerMixin):
+class WordLengthMeanStd(base.BaseEstimator,base.TransformerMixin):
     """
-    An Example custom transformer!
-    WordCount takes the 'lyrics' column returns the number of words
-    in the song.
-    Can you make it better?
-    Count the number of unique words instead?
+    This transformer takes a string and outputs the mean and standard deviation
+    of the word lenghts.
     """
     def __init__(self, colName):
         self.colName = colName
@@ -27,3 +23,20 @@ class WordCount(base.BaseEstimator,base.TransformerMixin):
 
     def fit_transform(self,X, *_):
         return self.transform(X)
+
+
+def main():
+    import pandas as pd
+    df = pd.read_csv('./lyrics.csv')
+    df.drop('index', axis=1)
+
+    df=df[~df.lyrics.isnull()]
+    
+    wlmsTransformer = WordLengthMeanStd('lyrics')
+    wlms = wlmsTransformer.transform(df)
+    print(wlms)
+
+if __name__ == "__main__":
+    main()
+
+
