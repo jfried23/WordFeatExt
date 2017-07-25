@@ -45,8 +45,8 @@ class UniqueTransformer(base.BaseEstimator, base.TransformerMixin):
             else:
                 ret.append(0)
 
-        X['unique_count'] = ret
-        return 
+        X.loc[:,'unique_count'] = ret
+        return X
     
     def fit_transform(self,X, *_):
         self.fit(X)
