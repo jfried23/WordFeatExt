@@ -20,6 +20,7 @@
 
 from collections import Counter
 from sklearn import base
+import re
 
 class UniqueTransformer(base.BaseEstimator, base.TransformerMixin):
     def __init__(self, col_name):
