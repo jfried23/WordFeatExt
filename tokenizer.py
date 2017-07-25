@@ -20,7 +20,7 @@ class Tokenizer(base.BaseEstimator,base.TransformerMixin):
         return tokenize_sents
 
     def transform(self, X, *_):
-        tfid=sklearn.feature_extraction.text.TfidfVectorizer(max_features=500, max_df = .9, tokenizer = self.tokenize)
+        tfid=feature_extraction.text.TfidfVectorizer(max_features=500, max_df = .9, tokenizer = self.tokenize)
         tf = tfid.fit_transform(X[self.colName].tolist())
         return tf
 
