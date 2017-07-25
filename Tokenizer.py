@@ -22,7 +22,8 @@ class Tokenizer(base.BaseEstimator,base.TransformerMixin):
     def transform(self, X, *_):
         tfid=feature_extraction.text.TfidfVectorizer(max_features=500, max_df = .9, tokenizer = self.tokenize)
         tf = tfid.fit_transform(X[self.colName].tolist())
-        return tf
+        tf_list = [tf[i] for i in range(tf.shape[0])]
+        return tf_list
 
     def fit_transform(self,X, *_):
         return self.transform(X) 
