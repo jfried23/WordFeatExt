@@ -1,3 +1,4 @@
+import numpy as np
 from sklearn import base
 from sklearn import pipeline
 from sklearn import preprocessing
@@ -14,7 +15,7 @@ class FeatureVectorizer(base.BaseEstimator, base.TransformerMixin):
 
     def transform(self, X, *_):
 
-        return X.loc[:, self.colNames].values
+        return np.vstack(X.loc[:, self.colNames].values)
 
     def fit_transform(self, X, *_):
         return self.transform(X)
@@ -22,7 +23,7 @@ class FeatureVectorizer(base.BaseEstimator, base.TransformerMixin):
 
 def main():
     import pandas as pd
-    df = pd.read_csv('./lyrics.csv')
+    df = pd.read_csv('./lyrics.csv', nrows=100)
     df.drop('index', axis=1)
 
     df=df[~df.lyrics.isnull()]
