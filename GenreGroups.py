@@ -1,5 +1,5 @@
 from sklearn import base
-import pandas
+import pandas as pd
 from sklearn.preprocessing import LabelBinarizer
 
 class GenreGroups(base.BaseEstimator,base.TransformerMixin):
@@ -11,8 +11,9 @@ class GenreGroups(base.BaseEstimator,base.TransformerMixin):
     2. pop_hiphop
     3. other
     """
-    def __init__(self):
-        self._transformer = sklearn.preprocessing.LabelBinarizer()
+    def __init__(self, colName):
+        self.colName = colName
+        self._transformer = LabelBinarizer()
 
     def groupGenres(self,i):
         genre='other'
@@ -22,17 +23,24 @@ class GenreGroups(base.BaseEstimator,base.TransformerMixin):
 
     def fit(self, X, *_):
 
-        X = X.apply(self.groupGenres)
-        self._transformer.fit(X)
+        newLabels = X[self.colName].apply(self.groupGenres)
+        self._transformer.fit(newLabels)
         return self
 
     def transform(self, X, *_):
-        X = X.apply(self.groupGenres)
-        return self._transformer.transform(X)
+        newLabels = X[self.colName].apply(self.groupGenres)
+        newLabels = pd.DataFrame(data=self._transformer.transform(newLabels))
+        X = pd.concat([X,newLabels],axis=1)
+        return X
 
     def fit_transform(self,X, *_):
-        self.fit(X)
-        return self.transform(X)
+        self.fit(X[self.colName])
+        return self.transform(X[self.colName])
 
     def inverse_transform(self,array,*_):
         return self._transformer.inverse_transform(array)
+
+if __name__=="__main__":
+    import sklearn
+    import pandas as pd
+    genre = GenreGroups('genre')
