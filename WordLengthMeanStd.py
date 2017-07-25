@@ -19,7 +19,9 @@ class WordLengthMeanStd(base.BaseEstimator,base.TransformerMixin):
         return np.array([np.mean(wl), np.std(wl)])
     
     def transform(self, X, *_):
-        return np.atleast_2d(X[self.colName].apply(self.word_length_mean_std)).T
+        new_feature = np.atleast_2d(X[self.colName].apply(self.word_length_mean_std)).T
+        X.loc[:,'WordLengthMeanStd'] = new_feature.tolist()
+        return X
 
     def fit_transform(self,X, *_):
         return self.transform(X)
@@ -33,8 +35,8 @@ def main():
     df=df[~df.lyrics.isnull()]
     
     wlmsTransformer = WordLengthMeanStd('lyrics')
-    wlms = wlmsTransformer.transform(df)
-    print(wlms)
+    df = wlmsTransformer.transform(df)
+    print(df.head())
 
 if __name__ == "__main__":
     main()
