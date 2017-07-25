@@ -1,8 +1,4 @@
-from collections import Counter
-from sklearn import base
-
-class UniqueTransformer(base.BaseEstimator, base.TransformerMixin):
-    """
+"""
     Unique Transformer:
 
     Transformer for use in scikit processing pipeline
@@ -20,7 +16,12 @@ class UniqueTransformer(base.BaseEstimator, base.TransformerMixin):
     fit_transform(self, X, *_):
         Takes: Input dataframe, variable arguments (dropped)
         Returns: self.transform(X)
-    """
+"""
+
+from collections import Counter
+from sklearn import base
+
+class UniqueTransformer(base.BaseEstimator, base.TransformerMixin):
     def __init__(self, col_name):
         self.col_name = col_name
         self.mapping_dict = mapping_dict
