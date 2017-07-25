@@ -30,8 +30,3 @@ class UniqueTransformer(base.BaseEstimator, base.TransformerMixin):
     def fit_transform(self,X, *_):
         self.fit(X)
         return self.transform(X)
-
-featUnion = pipeline.FeatureUnion([ 
-                         ('ut',UniqueTransformer('lyrics')),
-                      ])
-featUnion.fit_transform(df.iloc[0:200])

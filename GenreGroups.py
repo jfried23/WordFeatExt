@@ -1,4 +1,4 @@
-import base
+from sklearn import base
 import pandas
 from sklearn.preprocessing import LabelBinarizer
 
