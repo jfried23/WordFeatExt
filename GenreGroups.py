@@ -29,8 +29,7 @@ class GenreGroups(base.BaseEstimator,base.TransformerMixin):
 
     def transform(self, X, *_):
         newLabels = X[self.colName].apply(self.groupGenres)
-        newLabels = pd.DataFrame(data=self._transformer.transform(newLabels))
-        X = pd.concat([X,newLabels],axis=1)
+        X['target'] = self._transformer.transform(newLabels).tolist()
         return X
 
     def fit_transform(self,X, *_):
