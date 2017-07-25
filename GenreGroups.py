@@ -4,7 +4,7 @@ from sklearn.preprocessing import LabelBinarizer
 
 class GenreGroups(base.BaseEstimator,base.TransformerMixin):
     """
-    Input: 'genre' column, the series.
+    Input: 'genre' column into object and then pass DataFrame.
     Output: numpy array with Encoded Genres
     GenreGroups will group the genres into three classes:
     1. rock
