@@ -1,5 +1,5 @@
 import string
-from sklearn import feature_extraction
+from sklearn import feature_extraction, base
 
 class Tokenizer(base.BaseEstimator,base.TransformerMixin):
     def __init__(self,colName):
